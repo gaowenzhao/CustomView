@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            tv_test.setPro(60f)
+        fab.setOnClickListener {
+            tv_test.setPro(100f)
         }
     }
 
