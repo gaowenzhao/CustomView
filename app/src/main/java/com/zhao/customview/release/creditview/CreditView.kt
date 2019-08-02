@@ -1,11 +1,9 @@
-package com.zhao.customview.view
+package com.zhao.customview.release.creditview
 
-import android.animation.FloatEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import com.zhao.customview.R
@@ -50,10 +48,38 @@ class CreditView : View {
     private val valueAnimator by lazy { createAnimator() }
     private var maxSize:Float = 0f
     private var minSize:Float = 0f
-    private val wRectf by lazy { WRectf(paddingLeft.toFloat(),paddingTop.toFloat(), (width-paddingRight).toFloat(),(width-paddingBottom).toFloat())}
-    private val nRectf by lazy { NRectf(paddingLeft+distance, paddingTop+distance,width-paddingRight - distance,width-paddingBottom - distance)}
-    private val lScale by lazy { LittleScale(radus, paddingTop+distance-nStrokeWidth/2,radus,paddingTop+distance+nStrokeWidth/2) }
-    private val bScale by lazy { BigScale(lScale.startX, lScale.startY,lScale.startX,lScale.stopY+dp2px(3f)) }
+    private val wRectf by lazy {
+        WRectf(
+            paddingLeft.toFloat(),
+            paddingTop.toFloat(),
+            (width - paddingRight).toFloat(),
+            (width - paddingBottom).toFloat()
+        )
+    }
+    private val nRectf by lazy {
+        NRectf(
+            paddingLeft + distance,
+            paddingTop + distance,
+            width - paddingRight - distance,
+            width - paddingBottom - distance
+        )
+    }
+    private val lScale by lazy {
+        LittleScale(
+            radus,
+            paddingTop + distance - nStrokeWidth / 2,
+            radus,
+            paddingTop + distance + nStrokeWidth / 2
+        )
+    }
+    private val bScale by lazy {
+        BigScale(
+            lScale.startX,
+            lScale.startY,
+            lScale.startX,
+            lScale.stopY + dp2px(3f)
+        )
+    }
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs){
         val typedArray =context?.obtainStyledAttributes(attrs, R.styleable.credit)
@@ -153,6 +179,13 @@ class CreditView : View {
         val widthSize=MeasureSpec.getSize(widthMeasureSpec)
         val heightMode=MeasureSpec.getMode(heightMeasureSpec)
         val heightSize = MeasureSpec.getSize(heightMeasureSpec)
+        width = when {
+                widthSize>maxSize -> maxSize.toInt()
+                widthSize<minSize -> minSize.toInt()
+                else -> widthSize
+            }
+        radus = (width/2).toFloat()
+
         val height =  when(heightMode){
             MeasureSpec.EXACTLY->{
                 heightSize
@@ -161,12 +194,6 @@ class CreditView : View {
                 radus.toInt()+paddingBottom
             }
         }
-        width = when {
-                widthSize>maxSize -> maxSize.toInt()
-                widthSize<minSize -> minSize.toInt()
-                else -> widthSize
-            }
-        radus = (width/2).toFloat()
         setMeasuredDimension(width,height)
     }
     fun setPro(pro:Float){
@@ -184,7 +211,7 @@ class CreditView : View {
         return values * density + 0.5f
     }
     private fun createAnimator(): ValueAnimator {
-        val valueAnimator = ValueAnimator.ofObject(FloatEvaluator(),0f,setpro)
+        val valueAnimator = ValueAnimator.ofFloat(0f,setpro)
         valueAnimator.addUpdateListener {
             progress = it.animatedValue as Float
             invalidate()

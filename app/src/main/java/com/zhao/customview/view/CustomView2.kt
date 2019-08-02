@@ -1,18 +1,10 @@
 package com.zhao.customview.view
 
-import android.animation.FloatEvaluator
-import android.animation.TypeEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.graphics.PaintFlagsDrawFilter
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import com.zhao.customview.R
 
@@ -52,7 +44,7 @@ class CustomView2 :View{
         canvas.drawLine(500f,150f,600f,150f,paint)
 
         //*加上蒙版*
-        paint.color = resources.getColor(R.color.translucent)
+        paint.color = resources.getColor(R.color.translucent0)
         paint.style = Paint.Style.FILL
         canvas.drawArc(rectf,0f,progress,true,paint)
 
@@ -77,7 +69,7 @@ class CustomView2 :View{
         valueAnimator.start()
     }
     private fun createAnimator():ValueAnimator{
-        val valueAnimator = ValueAnimator.ofObject(FloatEvaluator(),0f,setpro)
+        val valueAnimator = ValueAnimator.ofFloat(0f,setpro)
         valueAnimator.addUpdateListener {
             progress = it.animatedValue as Float
             invalidate()

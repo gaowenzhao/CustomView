@@ -9,16 +9,52 @@
         tools:showIn="@layout/activity_main"
         tools:context=".MainActivity">
 
-    <com.zhao.customview.view.CreditView
+    <com.zhao.customview.release.creditview.CreditView
             android:id="@+id/tv_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            app:minSize = "100dp"
-            app:maxSize = "350dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:minSize="100dp"
+            app:maxSize="350dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+    <com.zhao.customview.view.CustomView2
+            android:id="@+id/customview2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_test"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp"
+    />
+    <FrameLayout
+            android:id="@+id/fl_test"
+            app:layout_constraintTop_toBottomOf="@+id/customview2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/test"
+                android:scaleType="fitXY"
+        />
+        <com.zhao.customview.release.FadeView.FadeView
+                android:id="@+id/fadeView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        />
+    </FrameLayout>
+    <com.zhao.customview.view.LogoLoadingView
+            app:layout_constraintTop_toBottomOf="@+id/customview2"
+            app:layout_constraintLeft_toRightOf="@+id/fl_test"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
 </android.support.constraint.ConstraintLayout>

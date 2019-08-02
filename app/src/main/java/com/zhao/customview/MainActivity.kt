@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             tv_test.setPro(100f)
+            customview2.setPro(80f)
+            fadeView.startAnimation()
         }
-    }
 
+    }
 
 }

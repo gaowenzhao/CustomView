@@ -1,4 +1,4 @@
-package com.zhao.customview.view
+package com.zhao.customview.release.creditview
 
 /**
  * 小刻度
